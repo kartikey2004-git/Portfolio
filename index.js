@@ -12,21 +12,15 @@ const handleSubmit = async (e) => {
   const email = document.getElementById("email").value;
   const subject = document.getElementById("subject").value;
   const message = document.getElementById("message").value;
-  console.log(name, email, subject, message);
   const data = {
-    name: name,
-    email: email,
-    subject: subject,
-    message: message,
+    name,
+    email,
+    subject,
+    message,
   };
-  const res = await fetch("https://kartikey-api.vercel.app/api/mail", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await res.json();
+  console.log(data);
+  const res = await axios({ method: "post", url: "https://kartikey-api.vercel.app/api/mail", data: data, headers: { "Content-Type": 'application/x-www-form-urlencoded'}});
+  const result = res.data;
   console.log(result);
   if (result.status === "success") {
     alert("Message Sent");
